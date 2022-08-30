@@ -1,0 +1,62 @@
+<!DOCTYPE>
+<html lang="eng">
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>React Import External JSON</title>
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <script src="https://unpkg.com/react/umd/react.development.js" crossorigin></script>
+  
+ <script src="https://unpkg.com/react-dom/umd/react-dom.development.js" crossorigin></script>
+  
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+</head> 
+  <body>
+    <h1>Hello</h1>
+    <div id="myApp">
+      
+    </div>
+    <script type="text/babel">
+      "use strict";
+
+      function ProjectList(props){
+      console.log(props);
+      //return some output for the component using JSX
+      
+        return <div>  
+              <ol>
+                {
+          //use map() to loop thru array passed in props.list
+                  props.list.map(
+      //use () not {} whenever define a function inside JSX
+                    (item, index)=>(
+                      <li key={index}>
+                        <a href = {item.link}>
+                          {item.firstname}
+                        </a>
+                      </li>
+                    )
+                  )
+                }
+              </ol>
+               </div>;
+      }
+      
+    //use jquery to load our JSON data from our server
+      
+      $.getJSON(
+      'x',   //url for jquery to ask for json from
+      
+      function(jsonFromJquery){
+      const myRoot = ReactDOM.createRoot(document.getElementById('myApp'));
+      myRoot.render(
+        < ProjectList list={jsonFromJquery} />
+      );
+      }
+      )
+      
+    </script>
+  </body>
+</html>
